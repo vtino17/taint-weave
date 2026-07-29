@@ -1,0 +1,9 @@
+{
+  "name": "@taintweave/cli",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": { "taint-weave": "./dist/index.js" },
+  "dependencies": { "@taintweave/core": "workspace:*" },
+  "scripts": { "build": "tsc -p tsconfig.build.json" }
+}

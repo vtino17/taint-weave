@@ -1,0 +1,9 @@
+{
+  "name": "@taintweave/studio",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "dependencies": { "@taintweave/core": "workspace:*" },
+  "devDependencies": { "vite": "^7.3.1" },
+  "scripts": { "dev": "vite", "build": "vite build" }
+}

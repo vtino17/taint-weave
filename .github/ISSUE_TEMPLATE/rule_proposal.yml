@@ -1,0 +1,23 @@
+name: Flow rule proposal
+description: Propose a deterministic cross-tool risk rule
+title: "rule: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: composition
+    attributes:
+      label: Dangerous composition
+    validations:
+      required: true
+  - type: textarea
+    id: rule
+    attributes:
+      label: Deterministic detection rule
+    validations:
+      required: true
+  - type: textarea
+    id: limits
+    attributes:
+      label: False positives and limitations
+    validations:
+      required: true

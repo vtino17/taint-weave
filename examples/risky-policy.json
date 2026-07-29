@@ -1,0 +1,13 @@
+{
+  "policyVersion": "1.0",
+  "sessionId": "incident-response-session",
+  "maxPathLength": 4,
+  "maxFindings": 100,
+  "sensitiveClasses": ["personal", "confidential", "credential"],
+  "untrustedClasses": ["untrusted"],
+  "externalSinkCapabilities": ["external-send"],
+  "privilegedCapabilities": ["execute-code", "destructive"],
+  "requireApprovalAcrossZones": true,
+  "blockUnapprovedHighRisk": true,
+  "approvals": []
+}

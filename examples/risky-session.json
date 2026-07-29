@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0",
+  "sessionId": "incident-response-session",
+  "summary": "Investigate incidents using vault, calendar, messaging, and shell tools.",
+  "servers": [
+    {
+      "id": "vault",
+      "trustZone": "trusted",
+      "tools": [{
+        "name": "read_secret",
+        "description": "Read a deployment credential.",
+        "consumes": ["internal"],
+        "produces": ["credential"],
+        "sanitizes": [],
+        "capabilities": ["private-read"],
+        "requiresHumanApproval": false
+      }]
+    },
+    {
+      "id": "calendar",
+      "trustZone": "partner",
+      "tools": [{
+        "name": "read_event",
+        "description": "Read calendar text supplied by external participants.",
+        "consumes": ["public"],
+        "produces": ["untrusted"],
+        "sanitizes": [],
+        "capabilities": ["untrusted-read", "external-read"],
+        "requiresHumanApproval": false
+      }]
+    },
+    {
+      "id": "context",
+      "trustZone": "trusted",
+      "tools": [{
+        "name": "merge_context",
+        "description": "Combine tool results into incident context.",
+        "consumes": ["any"],
+        "produces": ["internal"],
+        "sanitizes": [],
+        "capabilities": ["transform"],
+        "requiresHumanApproval": false
+      }]
+    },
+    {
+      "id": "messenger",
+      "trustZone": "partner",
+      "tools": [{
+        "name": "send_message",
+        "description": "Send supplied content to an external recipient.",
+        "consumes": ["any"],
+        "produces": ["public"],
+        "sanitizes": [],
+        "capabilities": ["external-send", "write"],
+        "requiresHumanApproval": true
+      }]
+    },
+    {
+      "id": "shell",
+      "trustZone": "trusted",
+      "tools": [{
+        "name": "run_command",
+        "description": "Execute a local shell command.",
+        "consumes": ["any"],
+        "produces": ["internal"],
+        "sanitizes": [],
+        "capabilities": ["execute-code", "destructive"],
+        "requiresHumanApproval": true
+      }]
+    }
+  ]
+}

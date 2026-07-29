@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "1.0",
+  "sessionId": "safe-research-session",
+  "summary": "Search public documentation, sanitize results, and publish a summary.",
+  "servers": [
+    {
+      "id": "web",
+      "trustZone": "partner",
+      "tools": [{
+        "name": "search_public_docs",
+        "description": "Read public, potentially untrusted documentation.",
+        "consumes": ["public"],
+        "produces": ["untrusted"],
+        "sanitizes": [],
+        "capabilities": ["untrusted-read", "external-read"],
+        "requiresHumanApproval": false
+      }]
+    },
+    {
+      "id": "local",
+      "trustZone": "trusted",
+      "tools": [{
+        "name": "sanitize_text",
+        "description": "Remove active instructions and return inert public text.",
+        "consumes": ["untrusted"],
+        "produces": ["public"],
+        "sanitizes": ["untrusted"],
+        "capabilities": ["transform"],
+        "requiresHumanApproval": false
+      }]
+    },
+    {
+      "id": "publisher",
+      "trustZone": "partner",
+      "tools": [{
+        "name": "publish_summary",
+        "description": "Publish reviewed public text.",
+        "consumes": ["public"],
+        "produces": ["public"],
+        "sanitizes": [],
+        "capabilities": ["external-send"],
+        "requiresHumanApproval": false
+      }]
+    }
+  ]
+}
