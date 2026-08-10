@@ -101,6 +101,20 @@ describe("flow analysis", () => {
     expect(result.coverage.truncated).toBe(true);
     expect(result.findings).toHaveLength(1);
   });
+
+  it("rejects unknown data classes before graph construction", async () => {
+    const manifest = structuredClone(safeManifest);
+    manifest.servers[0]!.tools[0]!.produces = ["unknown" as "public"];
+    await expect(analyzeSession({ manifest, policy: safePolicy }))
+      .rejects.toThrow("known data classes");
+  });
+
+  it("rejects unknown capabilities before risk classification", async () => {
+    const manifest = structuredClone(safeManifest);
+    manifest.servers[0]!.tools[0]!.capabilities = ["unknown" as "transform"];
+    await expect(analyzeSession({ manifest, policy: safePolicy }))
+      .rejects.toThrow("known capabilities");
+  });
 });
 
 describe("flow receipts", () => {
